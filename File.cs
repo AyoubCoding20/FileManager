@@ -1,19 +1,18 @@
-﻿using System;
+using System;
 
 namespace FileManager
 {
     public class File
     {
-        public string FilePath {get; set;}
-        public File(string filepath)
+        public File()
         {
-            this.FilePath = filepath;
+            System.Console.WriteLine("FileManager launched !");
         }
-        public void Create()
+        public void Create(System.string filepath)
         {
             try
             {
-                System.IO.File.Create(this.FilePath).Close();
+                System.IO.File.Create(filepath).Close();
             }
             catch (System.UnauthorizedAccessException e1)
             {
@@ -24,11 +23,11 @@ namespace FileManager
                 System.Console.WriteLine("IOExecption : I/O error " + e2.Message);
             }
         }
-        public void ReadAllTextInFile()
+        public void ReadAllTextInFile(string filepath)
         {
             try
             {
-                using (System.IO.StreamReader sr = new System.IO.StreamReader(this.FilePath))
+                using (System.IO.StreamReader sr = new System.IO.StreamReader(filepath))
                 {
                     System.String text;
                     while ((text = sr.ReadLine()) != null)
@@ -43,7 +42,7 @@ namespace FileManager
                 System.Console.WriteLine("Would you want to create the file ? (y/n) ");
                 string s = Console.ReadLine();
                 if (s == "y")
-                    this.Create();
+                    this.Create(filepath);
                 else if (s == "n")
                     return;
             }
@@ -62,7 +61,7 @@ namespace FileManager
             {
                 Console.WriteLine("Text to write : ");
                 System.String writetext = System.Console.ReadLine();
-                using(System.IO.StreamWriter sw = new System.IO.StreamWriter(this.FilePath))
+                using(System.IO.StreamWriter sw = new System.IO.StreamWriter(filepath))
                 {
                     sw.WriteLine(writetext);
                 }
@@ -73,7 +72,7 @@ namespace FileManager
                 System.Console.WriteLine("You want to create the file ? (y/n)");
                 string choice = System.Console.ReadLine();
                 if (choice == "y")
-                    this.Create();
+                    this.Create(filepath);
                 else if (choice == "n")
                     return;
             }
@@ -82,11 +81,11 @@ namespace FileManager
                 System.Console.WriteLine(io.Message);
             }
         }
-        public void CopyFile(string destpath)
+        public void CopyFile(System.string srcpath, string destpath)
         {
             try
             {
-                System.IO.File.Copy(this.FilePath, destpath);
+                System.IO.File.Copy(srcpath, destpath);
                 System.Console.WriteLine("File copied to " + destpath);
             }
             catch (ArgumentNullException e9)
@@ -95,11 +94,11 @@ namespace FileManager
             }
             
         }
-        public void MoveFile(string destpath)
+        public void MoveFile(System.string srcpath, string destpath)
         {
             try
             {
-                System.IO.File.Move(this.FilePath, destpath);
+                System.IO.File.Move(srcpath, destpath);
                 System.Console.WriteLine("File moved to " + destpath);
             }
             catch (ArgumentException e36)
@@ -107,11 +106,11 @@ namespace FileManager
                 System.Console.WriteLine(e36.Message);
             }
         }
-        public void DeleteFile()
+        public void DeleteFile(filepath)
         {
             try
             {
-                System.IO.File.Delete(this.FilePath);
+                System.IO.File.Delete(filepath);
             }
             catch (ArgumentNullException a)
             {
@@ -122,9 +121,9 @@ namespace FileManager
                 System.Console.WriteLine(i.Message);
             }
         }
-        public bool FileExists()   
+        public bool FileExists(filepath)   
         {
-            if (System.IO.File.Exists(this.FilePath))
+            if (System.IO.File.Exists(filepath))
                 return true;
             else
                 return false;
