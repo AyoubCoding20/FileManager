@@ -55,7 +55,7 @@ namespace FileManager
                 System.Console.WriteLine(io2.Message);
             }
         }
-        public void WriteText()
+        public void WriteText(string filepath)
         {
             try
             {
@@ -106,7 +106,7 @@ namespace FileManager
                 System.Console.WriteLine(e36.Message);
             }
         }
-        public void DeleteFile(filepath)
+        public void DeleteFile(string filepath)
         {
             try
             {
@@ -121,7 +121,7 @@ namespace FileManager
                 System.Console.WriteLine(i.Message);
             }
         }
-        public bool FileExists(filepath)   
+        public bool FileExists(string filepath)   
         {
             if (System.IO.File.Exists(filepath))
                 return true;
