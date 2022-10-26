@@ -2,65 +2,64 @@ namespace FileManager
 {
     public class Directory
     {
-        public string DirPath {get; set;}
-        public Directory(string dirpath)
+        public Directory()
         {
-            this.DirPath = dirpath;
+            System.Console.WriteLine("DirectoryManager launched !");
         }
-        public void CreateDirectory()
+        public void CreateDirectory(string dirpath)
         {
             try
             {
-                System.IO.Directory.CreateDirectory(this.DirPath);
+                System.IO.Directory.CreateDirectory(dirpath);
             }
             catch (Exception e1)
             {
                 System.Console.WriteLine(e1.Message);
             }
         }
-        public void DeleteDirectory()
+        public void DeleteDirectory(string dirpath)
         {
             try
             {
-                System.IO.Directory.Delete(this.DirPath, true);
+                System.IO.Directory.Delete(dirpath, true);
             }
             catch (Exception e2)
             {
                 System.Console.WriteLine(e2.Message);
             }
         }
-        public void GetFiles()
+        public void GetFiles(string dirpath)
         {
-            System.String[] files = System.IO.Directory.GetFiles(this.DirPath);
+            System.String[] files = System.IO.Directory.GetFiles(dirpath);
             foreach (System.String file in files)
             {
-                System.Console.WriteLine($"Files in {this.DirPath} : {file}");
+                System.Console.WriteLine($"Files in {dirpath} : {file}");
             }
         }
-        public bool DirExists()
+        public bool DirExists(string dirpath)
         {
-            if (System.IO.Directory.Exists(this.DirPath))
+            if (System.IO.Directory.Exists(dirpath))
                 return true;
             else
                 return false;
         }
-        public void MoveDir(string destinpath)
+        public void MoveDir(string srcpath, string destinpath)
         {
-            System.IO.Directory.Move(this.DirPath, destinpath);
+            System.IO.Directory.Move(srcpath, destinpath);
             System.Console.WriteLine("Directory moved !");
         }
-        public void CopyDirectory(string destFolder)
+        public void CopyDirectory(string srcpath, string destFolder)
         {
             if (!System.IO.Directory.Exists(destFolder))
                 System.IO.Directory.CreateDirectory(destFolder);
-            string[] files = System.IO.Directory.GetFiles(this.DirPath);
+            string[] files = System.IO.Directory.GetFiles(srcpath);
             foreach (string file in files)
             {
                 string name = Path.GetFileName(file);
                 string dest = Path.Combine(destFolder, name);
                 System.IO.File.Copy(file, dest);
             }
-            string[] folders = System.IO.Directory.GetDirectories(this.DirPath);
+            string[] folders = System.IO.Directory.GetDirectories(srcpath);
             foreach (string folder in folders)
             {
                 string name = Path.GetFileName(folder);
