@@ -123,10 +123,7 @@ namespace FileManager
         }
         public bool FileExists(string filepath)   
         {
-            if (System.IO.File.Exists(filepath))
-                return true;
-            else
-                return false;
+            return System.IO.File.Exists(filepath);
         }
     }
 }
