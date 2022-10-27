@@ -38,10 +38,7 @@ namespace FileManager
         }
         public bool DirExists(string dirpath)
         {
-            if (System.IO.Directory.Exists(dirpath))
-                return true;
-            else
-                return false;
+            return System.IO.Directory.Exists(dirpath);
         }
         public void MoveDir(string srcpath, string destinpath)
         {
